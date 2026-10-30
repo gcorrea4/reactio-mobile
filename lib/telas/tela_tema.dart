@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../estilo/estilo_app.dart';
 import '../modelos/afirmacao.dart';
+import '../rotas.dart';
 
 /// Mostra as lições de um tema para o participante escolher qual responder.
 class TelaTema extends StatelessWidget {
@@ -40,8 +41,14 @@ class TelaTema extends StatelessWidget {
                   mainAxisSpacing: Espaco.s,
                 ),
                 itemCount: tema.afirmacoes.length,
-                itemBuilder: (context, indice) =>
-                    _CartaoLicao(numero: indice + 1, onTap: () {}),
+                itemBuilder: (context, indice) => _CartaoLicao(
+                  numero: indice + 1,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    Rotas.desafio,
+                    arguments: tema.afirmacoes[indice],
+                  ),
+                ),
               ),
             ),
           ],
