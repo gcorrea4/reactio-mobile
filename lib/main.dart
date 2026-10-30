@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'estado/progresso_trilha.dart';
 import 'estilo/estilo_app.dart';
 import 'rotas.dart';
 
@@ -12,12 +13,14 @@ class ReactioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'REACTIO',
-      debugShowCheckedModeBanner: false,
-      theme: EstiloApp.tema,
-      initialRoute: Rotas.inicial,
-      onGenerateRoute: Rotas.gerar,
+    return ProgressoTrilha(
+      child: MaterialApp(
+        title: 'REACTIO',
+        debugShowCheckedModeBanner: false,
+        theme: EstiloApp.tema,
+        initialRoute: Rotas.inicial,
+        onGenerateRoute: Rotas.gerar,
+      ),
     );
   }
 }

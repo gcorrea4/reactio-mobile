@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../estado/progresso_trilha.dart';
 import '../estilo/estilo_app.dart';
 import '../modelos/afirmacao.dart';
 import '../rotas.dart';
@@ -13,8 +14,9 @@ class TelaTema extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textos = Theme.of(context).textTheme;
-    // A altura das células acompanha o tamanho de fonte do sistema.
-    final alturaCelula = MediaQuery.textScalerOf(context).scale(96);
+    final progresso = ProgressoTrilha.of(context);
+    // As células acompanham o tamanho de fonte do sistema.
+    final escala = MediaQuery.textScalerOf(context);
 
     return Scaffold(
       appBar: AppBar(title: Text(tema.nome)),
@@ -24,7 +26,11 @@ class TelaTema extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(Espaco.m),
-              child: Text(tema.descricao, style: textos.bodyLarge),
+              child: Text(
+                '${tema.descricao} ${progresso.concluidasNoTema(tema)} de '
+                '${tema.afirmacoes.length} lições concluídas.',
+                style: textos.bodyLarge,
+              ),
             ),
             Expanded(
               child: GridView.builder(
@@ -35,20 +41,24 @@ class TelaTema extends StatelessWidget {
                   Espaco.m,
                 ),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 240,
-                  mainAxisExtent: alturaCelula,
+                  maxCrossAxisExtent: escala.scale(200),
+                  mainAxisExtent: escala.scale(96),
                   crossAxisSpacing: Espaco.s,
                   mainAxisSpacing: Espaco.s,
                 ),
                 itemCount: tema.afirmacoes.length,
-                itemBuilder: (context, indice) => _CartaoLicao(
-                  numero: indice + 1,
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    Rotas.desafio,
-                    arguments: tema.afirmacoes[indice],
-                  ),
-                ),
+                itemBuilder: (context, indice) {
+                  final afirmacao = tema.afirmacoes[indice];
+                  return _CartaoLicao(
+                    numero: indice + 1,
+                    concluida: progresso.estaConcluida(afirmacao),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      Rotas.desafio,
+                      arguments: afirmacao,
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -59,25 +69,53 @@ class TelaTema extends StatelessWidget {
 }
 
 class _CartaoLicao extends StatelessWidget {
-  const _CartaoLicao({required this.numero, required this.onTap});
+  const _CartaoLicao({
+    required this.numero,
+    required this.concluida,
+    required this.onTap,
+  });
 
   final int numero;
+  final bool concluida;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final textos = Theme.of(context).textTheme;
+
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(Espaco.m),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Lição $numero',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Lição $numero', style: textos.titleMedium),
+              const SizedBox(height: Espaco.xs),
+              Row(
+                children: [
+                  Icon(
+                    concluida
+                        ? Icons.check_circle
+                        : Icons.radio_button_unchecked,
+                    size: 18,
+                    color: concluida
+                        ? CoresReactio.acerto
+                        : CoresReactio.textoSecundario,
+                  ),
+                  const SizedBox(width: Espaco.xs),
+                  Expanded(
+                    child: Text(
+                      concluida ? 'Concluída' : 'Não iniciada',
+                      style: textos.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

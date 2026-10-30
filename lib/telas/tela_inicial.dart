@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../estado/progresso_trilha.dart';
 import '../estilo/estilo_app.dart';
 import '../rotas.dart';
+import '../widgets/cartao_progresso.dart';
 
 /// Apresenta o REACTIO e leva para a trilha ou para o formulário de sugestão.
 class TelaInicial extends StatelessWidget {
@@ -66,11 +68,17 @@ class TelaInicial extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: Espaco.m),
+            const CartaoProgresso(),
             const SizedBox(height: Espaco.l),
             FilledButton.icon(
               onPressed: () => Navigator.pushNamed(context, Rotas.trilha),
               icon: const Icon(Icons.play_arrow),
-              label: const Text('Começar a trilha'),
+              label: Text(
+                ProgressoTrilha.of(context).concluidas.isEmpty
+                    ? 'Começar a trilha'
+                    : 'Continuar a trilha',
+              ),
             ),
             const SizedBox(height: Espaco.s),
             OutlinedButton.icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../estado/progresso_trilha.dart';
 import '../estilo/estilo_app.dart';
 import '../modelos/afirmacao.dart';
 import '../rotas.dart';
@@ -19,6 +20,7 @@ class _TelaDesafioState extends State<TelaDesafio> {
   Classificacao? _resposta;
 
   void _responder() {
+    ProgressoTrilha.of(context).concluir(widget.afirmacao);
     Navigator.pushReplacementNamed(
       context,
       Rotas.explicacao,
