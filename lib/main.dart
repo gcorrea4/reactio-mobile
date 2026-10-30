@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'estilo/estilo_app.dart';
+import 'telas/tela_inicial.dart';
 
 void main() {
   runApp(const ReactioApp());
@@ -15,7 +16,7 @@ class ReactioApp extends StatelessWidget {
       title: 'REACTIO',
       debugShowCheckedModeBanner: false,
       theme: EstiloApp.tema,
-      home: const Scaffold(body: Center(child: Text('REACTIO'))),
+      home: const TelaInicial(),
     );
   }
 }
