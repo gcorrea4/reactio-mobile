@@ -19,7 +19,14 @@ class _TelaDesafioState extends State<TelaDesafio> {
   Classificacao? _resposta;
 
   void _responder() {
-    Navigator.pushReplacementNamed(context, Rotas.explicacao);
+    Navigator.pushReplacementNamed(
+      context,
+      Rotas.explicacao,
+      arguments: ArgumentosExplicacao(
+        afirmacao: widget.afirmacao,
+        resposta: _resposta!,
+      ),
+    );
   }
 
   @override

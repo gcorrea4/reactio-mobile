@@ -131,6 +131,17 @@ const List<Tema> temas = [
   ),
 ];
 
+/// Próxima afirmação do mesmo tema, ou `null` se esta for a última.
+Afirmacao? proximaAfirmacao(Afirmacao afirmacao) {
+  for (final tema in temas) {
+    final indice = tema.afirmacoes.indexOf(afirmacao);
+    if (indice != -1 && indice + 1 < tema.afirmacoes.length) {
+      return tema.afirmacoes[indice + 1];
+    }
+  }
+  return null;
+}
+
 /// Quantidade de lições de toda a trilha.
 int get totalDeLicoes =>
     temas.fold(0, (total, tema) => total + tema.afirmacoes.length);

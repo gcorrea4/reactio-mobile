@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../dados/trilha_mock.dart';
 import '../estilo/estilo_app.dart';
-import '../modelos/afirmacao.dart';
+import '../rotas.dart';
 import '../widgets/selo_revisar.dart';
 
 /// Mostra o resultado da resposta, a classificação correta, a explicação e a
 /// fonte. Errar leva à mesma explicação de quem acertou, sem penalidade.
 class TelaExplicacao extends StatelessWidget {
-  const TelaExplicacao({
-    super.key,
-    required this.afirmacao,
-    required this.resposta,
-  });
+  const TelaExplicacao({super.key, required this.argumentos});
 
-  final Afirmacao afirmacao;
-  final Classificacao resposta;
+  final ArgumentosExplicacao argumentos;
 
   @override
   Widget build(BuildContext context) {
     final textos = Theme.of(context).textTheme;
+    final afirmacao = argumentos.afirmacao;
+    final resposta = argumentos.resposta;
+    final proxima = proximaAfirmacao(afirmacao);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Explicação')),
@@ -61,6 +60,17 @@ class TelaExplicacao extends StatelessWidget {
               children: [Text(afirmacao.fonte, style: textos.bodyMedium)],
             ),
             const SizedBox(height: Espaco.l),
+            if (proxima != null) ...[
+              FilledButton(
+                onPressed: () => Navigator.pushReplacementNamed(
+                  context,
+                  Rotas.desafio,
+                  arguments: proxima,
+                ),
+                child: const Text('Próxima afirmação'),
+              ),
+              const SizedBox(height: Espaco.s),
+            ],
             OutlinedButton(
               onPressed: () => Navigator.pop(context),
               child: const Text('Voltar para o tema'),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'dados/trilha_mock.dart';
 import 'modelos/afirmacao.dart';
 import 'telas/tela_desafio.dart';
 import 'telas/tela_explicacao.dart';
@@ -8,6 +7,14 @@ import 'telas/tela_inicial.dart';
 import 'telas/tela_sugestao.dart';
 import 'telas/tela_tema.dart';
 import 'telas/tela_trilha.dart';
+
+/// Parâmetros que a tela de desafio envia para a tela de explicação.
+class ArgumentosExplicacao {
+  const ArgumentosExplicacao({required this.afirmacao, required this.resposta});
+
+  final Afirmacao afirmacao;
+  final Classificacao resposta;
+}
 
 /// Rotas nomeadas do app.
 abstract final class Rotas {
@@ -24,8 +31,7 @@ abstract final class Rotas {
       tema => TelaTema(tema: settings.arguments! as Tema),
       desafio => TelaDesafio(afirmacao: settings.arguments! as Afirmacao),
       explicacao => TelaExplicacao(
-        afirmacao: temas.first.afirmacoes.first,
-        resposta: temas.first.afirmacoes.first.classificacao,
+        argumentos: settings.arguments! as ArgumentosExplicacao,
       ),
       sugestao => const TelaSugestao(),
       _ => const TelaInicial(),
