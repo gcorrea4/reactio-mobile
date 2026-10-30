@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../dados/trilha_mock.dart';
 import '../estilo/estilo_app.dart';
+import '../modelos/afirmacao.dart';
+import '../rotas.dart';
 
 /// Lista os temas da trilha para o participante escolher por onde começar.
 class TelaTrilha extends StatelessWidget {
   const TelaTrilha({super.key});
-
-  static const _temas = [
-    (
-      nome: 'Radiação no cotidiano',
-      descricao: 'De onde vem a radiação que nos cerca.',
-      icone: Icons.wb_sunny_outlined,
-    ),
-    (
-      nome: 'Aplicações no cotidiano',
-      descricao: 'Usos em alimentos e na saúde.',
-      icone: Icons.biotech_outlined,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,29 +19,38 @@ class TelaTrilha extends StatelessWidget {
           children: [
             Text('Temas', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: Espaco.s),
-            for (final tema in _temas)
-              Padding(
-                padding: const EdgeInsets.only(bottom: Espaco.s),
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: Espaco.m,
-                      vertical: Espaco.s,
-                    ),
-                    leading: Icon(
-                      tema.icone,
-                      color: CoresReactio.petroleo,
-                      size: 32,
-                    ),
-                    title: Text(tema.nome),
-                    subtitle: Text(tema.descricao),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {},
-                  ),
-                ),
-              ),
+            for (final tema in temas) _CartaoTema(tema: tema),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CartaoTema extends StatelessWidget {
+  const _CartaoTema({required this.tema});
+
+  final Tema tema;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: Espaco.s),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: Espaco.m,
+            vertical: Espaco.s,
+          ),
+          leading: Icon(tema.icone, color: CoresReactio.petroleo, size: 32),
+          title: Text(tema.nome),
+          subtitle: Text(
+            '${tema.descricao}\n${tema.afirmacoes.length} lições',
+          ),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () =>
+              Navigator.pushNamed(context, Rotas.tema, arguments: tema),
         ),
       ),
     );
