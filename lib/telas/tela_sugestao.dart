@@ -38,6 +38,15 @@ class _TelaSugestaoState extends State<TelaSugestao> {
   void _enviar() {
     if (!_formulario.currentState!.validate()) return;
     _formulario.currentState!.reset();
+    FocusScope.of(context).unfocus();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Obrigado pela sugestão! Nesta versão de demonstração, ela não é '
+          'enviada nem salva.',
+        ),
+      ),
+    );
   }
 
   @override
