@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../estilo/estilo_app.dart';
 import '../modelos/afirmacao.dart';
+import '../rotas.dart';
 import '../widgets/selo_revisar.dart';
 
 /// Apresenta a afirmação e as três alternativas. Não há limite de tempo.
@@ -18,7 +19,7 @@ class _TelaDesafioState extends State<TelaDesafio> {
   Classificacao? _resposta;
 
   void _responder() {
-    Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, Rotas.explicacao);
   }
 
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'dados/trilha_mock.dart';
 import 'modelos/afirmacao.dart';
 import 'telas/tela_desafio.dart';
+import 'telas/tela_explicacao.dart';
 import 'telas/tela_inicial.dart';
 import 'telas/tela_sugestao.dart';
 import 'telas/tela_tema.dart';
@@ -13,6 +15,7 @@ abstract final class Rotas {
   static const trilha = '/trilha';
   static const tema = '/tema';
   static const desafio = '/desafio';
+  static const explicacao = '/explicacao';
   static const sugestao = '/sugestao';
 
   static Route<void> gerar(RouteSettings settings) {
@@ -20,6 +23,10 @@ abstract final class Rotas {
       trilha => const TelaTrilha(),
       tema => TelaTema(tema: settings.arguments! as Tema),
       desafio => TelaDesafio(afirmacao: settings.arguments! as Afirmacao),
+      explicacao => TelaExplicacao(
+        afirmacao: temas.first.afirmacoes.first,
+        resposta: temas.first.afirmacoes.first.classificacao,
+      ),
       sugestao => const TelaSugestao(),
       _ => const TelaInicial(),
     };
