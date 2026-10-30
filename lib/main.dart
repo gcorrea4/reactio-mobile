@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'estilo/estilo_app.dart';
-import 'telas/tela_inicial.dart';
+import 'rotas.dart';
 
 void main() {
   runApp(const ReactioApp());
@@ -16,7 +16,8 @@ class ReactioApp extends StatelessWidget {
       title: 'REACTIO',
       debugShowCheckedModeBanner: false,
       theme: EstiloApp.tema,
-      home: const TelaInicial(),
+      initialRoute: Rotas.inicial,
+      onGenerateRoute: Rotas.gerar,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../estilo/estilo_app.dart';
+import '../rotas.dart';
 
 /// Apresenta o REACTIO e leva para a trilha ou para o formulário de sugestão.
 class TelaInicial extends StatelessWidget {
@@ -67,13 +68,13 @@ class TelaInicial extends StatelessWidget {
             ),
             const SizedBox(height: Espaco.l),
             FilledButton.icon(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, Rotas.trilha),
               icon: const Icon(Icons.play_arrow),
               label: const Text('Começar a trilha'),
             ),
             const SizedBox(height: Espaco.s),
             OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, Rotas.sugestao),
               icon: const Icon(Icons.edit_note),
               label: const Text('Sugerir uma afirmação'),
             ),
