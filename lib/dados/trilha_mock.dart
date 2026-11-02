@@ -4,8 +4,8 @@ import '../modelos/afirmacao.dart';
 
 /// Dados mockados da trilha, mantidos em memória nesta sprint.
 ///
-/// As afirmações com `aRevisar: true` foram redigidas a partir da fonte
-/// indicada e ainda dependem da revisão da equipe.
+/// Uma afirmação nova, ainda sem revisão, deve usar `aRevisar: true` para o
+/// app exibir o selo "Texto a revisar".
 const List<Tema> temas = [
   Tema(
     nome: 'Radiação no cotidiano',
@@ -21,7 +21,6 @@ const List<Tema> temas = [
             'continua acontecendo. Parte dela vem de fontes naturais do '
             'ambiente.',
         fonte: 'NRC, Sources of Radiation',
-        aRevisar: true,
       ),
       Afirmacao(
         id: 'radiacao-2',
@@ -33,7 +32,6 @@ const List<Tema> temas = [
             'Existem fontes naturais e fontes criadas pelo ser humano. O '
             'radônio e a radiação cósmica são exemplos de fontes naturais.',
         fonte: 'EPA, Radiation Sources and Doses',
-        aRevisar: true,
       ),
       Afirmacao(
         id: 'radiacao-3',
@@ -44,7 +42,6 @@ const List<Tema> temas = [
             'Os níveis aumentam em altitudes maiores, porque a atmosfera '
             'oferece menos proteção contra a radiação cósmica.',
         fonte: 'EPA, Radiation Sources and Doses',
-        aRevisar: true,
       ),
       Afirmacao(
         id: 'radiacao-4',
@@ -53,11 +50,10 @@ const List<Tema> temas = [
             'casa.',
         classificacao: Classificacao.verdadeiro,
         explicacao:
-            'O radônio é um gás radioativo, e as residências são um ponto '
-            'importante de exposição. A fonte cita a recomendação de testar '
-            'as casas para conhecer o nível presente.',
+            'O radônio é um gás radioativo, e a fonte trata as casas como um '
+            'local de exposição. Ela também cita a recomendação de testar as '
+            'residências para conhecer o nível presente.',
         fonte: 'EPA, Health Risk of Radon',
-        aRevisar: true,
       ),
       Afirmacao(
         id: 'radiacao-5',
@@ -69,7 +65,6 @@ const List<Tema> temas = [
             'O potássio-40, um exemplo de material radioativo natural, está '
             'presente em alimentos, no solo e na água.',
         fonte: 'EPA, Radiation Sources and Doses',
-        aRevisar: true,
       ),
     ],
   ),
@@ -112,7 +107,6 @@ const List<Tema> temas = [
         fonte:
             'FDA, Medical X-ray Imaging; FDA, MRI (Magnetic Resonance '
             'Imaging)',
-        aRevisar: true,
       ),
       Afirmacao(
         id: 'aplicacoes-4',
@@ -125,7 +119,6 @@ const List<Tema> temas = [
             'e a radiação é uma delas, ao lado de calor úmido, calor seco e '
             'gases como o óxido de etileno.',
         fonte: 'FDA, Sterilization for Medical Devices',
-        aRevisar: true,
       ),
     ],
   ),

@@ -87,7 +87,7 @@ Inicial ──> Trilha ──> Tema ──> Desafio ──> Explicação
 
 ## Conteúdo e revisão
 
-As afirmações ficam em `lib/dados/trilha_mock.dart`. As marcadas com o selo "Texto a revisar" foram redigidas a partir das páginas abaixo e ainda dependem da revisão da equipe.
+As afirmações ficam em `lib/dados/trilha_mock.dart`. As duas sobre irradiação de alimentos usam [FDA, Food Irradiation: What You Need to Know](https://www.fda.gov/food/buy-store-serve-safe-food/food-irradiation-what-you-need-know). As demais foram conferidas nas páginas abaixo. Uma afirmação nova, ainda sem revisão, pode usar `aRevisar: true` para o app exibir o selo "Texto a revisar".
 
 | Afirmação | Classificação | Fonte |
 |---|---|---|
