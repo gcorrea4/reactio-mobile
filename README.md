@@ -22,7 +22,7 @@ Nesta sprint os dados são mockados e ficam em memória. O progresso se perde ao
 
 ## Vídeo demonstrativo
 
-<LINK_DO_VIDEO>
+https://youtu.be/Q7osobB3H9Y
 
 O roteiro de gravação está em [docs/roteiro_video.md](docs/roteiro_video.md).
 
